@@ -1,4 +1,3 @@
-```markdown
 # Servidor Web em Go
 
 Este é um exemplo de servidor web simples em Go utilizando o pacote `net/http`. Ele serve arquivos estáticos, trata rotas de formulários e responde com uma mensagem personalizada.
