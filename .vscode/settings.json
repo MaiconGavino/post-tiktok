@@ -1,0 +1,5 @@
+{
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "go.inferGopath": false,
+    "go.installDependenciesWhenBuilding": true
+}
