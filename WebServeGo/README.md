@@ -12,7 +12,7 @@ Este é um exemplo de servidor web simples em Go utilizando o pacote `net/http`.
 
 Abaixo está o fluxo básico do servidor:
 
-![Fluxo Web Serve com GO](WebServeGo/fluxo.png)
+![Fluxo Web Serve com GO](./fluxo.png)
 
 ## Requisitos
 
