@@ -2,8 +2,12 @@ package main
 
 import(
 	"log"
+	"os"
 	"net/http"
+	"encoding/json"
+	"fmt"
 	"html/template"
+	"io/ioutil"
 	"github.com/joho/godotenv"
 )
 
@@ -32,6 +36,47 @@ func indexHandler(w http.ResponseWriter, r *http.Request){
 }
 
 
+func weatherHandler(w http.ResponseWriter, r *http.Request){
+	w.Header().Set("Content-Type", "application/json")
+
+	city := r.URL.Query().Get("City")
+	if city == ""{
+		city = "Campinas"
+	}
+
+	apiKey := os.Getenv("API_KEY")
+	if apiKey == ""{
+		http.Error(w, "Error fetching data from API", http.StatusInternalServerError)
+		return
+	}
+
+	url := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=%s&units=metric&appid=%s", city, apiKey)
+
+	resp, err := http.Get(url)
+	if err != nil {
+		http.Error(w, "Error fetching data from API", http.StatusInternalServerError)
+		return
+	}
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		http.Error(w, "Error reading response", http.StatusInternalServerError)
+		return
+	}
+	var openWeather OpenWeatherResponse
+	if err := json.Unmarshal(body, &openWeather); err != nil{
+		http.Error(w, "Error decoding Json", http.StatusInternalServerError)
+		return
+	}
+	response := WeatherResponse{
+		City: openWeather.Name,
+		Temperature : openWeather.Main.Temp,
+	}
+	json.NewEncoder(w).Encode(response)
+}
+
+
+
 func main(){
 	loadEnv()
 
@@ -39,6 +84,7 @@ func main(){
 	http.Handle("/static", http.StripPrefix("/static/", fs))
 
 	http.HandleFunc("/", indexHandler)
+	http.HandleFunc("weather", weatherHandler)
 
 	log.Println("Serve running on port 8080")
 	log.Fatal(http.ListenAndServe(":8080",nil))
