@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weather Widget</title>
-  <link rel="stylesheet" href="./static/css/styles.css">
+  <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
   <div class="card">
@@ -22,17 +22,15 @@
     </div>
 
     <div class="card-header">
-      <span id="city">City, Country</span>
-      <span id="date">Date</span>
+      <span>{{.City}}</span> <!-- Exibe a cidade dinamicamente -->
+      <span>{{.Temperature}}°C</span> <!-- Exibe a temperatura dinamicamente -->
     </div>
 
-    <span id="temperature" class="temp">--°</span>
+    <span class="temp">{{.Temperature}}°</span>
 
     <div class="temp-scale">
       <span>Celsius</span>
     </div>
   </div>
-
-  <script src="./static/js/script.js"></script>
 </body>
 </html>
