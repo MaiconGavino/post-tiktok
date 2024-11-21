@@ -33,7 +33,7 @@ func ConnectDB() {
 	if err != nil {
 		log.Fatalf("Error connecting to the database: %v", err)
 	}
-
+	
 	err = DB.Ping()
 	if err != nil {
 		log.Fatalf("Database is unreachable: %v", err)

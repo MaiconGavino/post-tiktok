@@ -13,7 +13,7 @@ Este é um projeto de formulário de registro de usuários com backend em Go e i
 ## Estrutura do Projeto
 
 ```
-project/
+Forms/
 ├── main.go                 # Arquivo principal para inicializar o servidor
 ├── config/
 │   └── db.go               # Configuração e conexão com o banco de dados
