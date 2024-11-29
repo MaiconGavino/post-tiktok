@@ -8,7 +8,7 @@ import (
 	"text/template"
 )
 
-var temp = template.Must(template.ParseGlob("templates/static/*.html"))
+var temp = template.Must(template.ParseFiles("./template/index.html"))
 
 func RenderTemplate(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
@@ -41,5 +41,5 @@ func RegistreData(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	http.Redirect(w, r, "/sucess", http.StatusSeeOther)
+	http.Redirect(w, r, "/success", http.StatusSeeOther)
 }
