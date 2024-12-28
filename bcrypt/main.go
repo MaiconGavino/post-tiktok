@@ -20,16 +20,12 @@ func checkPasswordHash(password, hash string) bool {
 
 func main() {
 	password := "minhaSenhaSuperSegura123"
-	
-	// Hashing a senha
 	hash, err := hashPassword(password)
 	if err != nil {
 		fmt.Println("Erro ao gerar hash:", err)
 		return
 	}
 	fmt.Println("Hash gerado:", hash)
-	
-	// Verificando a senha
 	match := checkPasswordHash(password, hash)
 	fmt.Println("Senha válida?", match)
 }
