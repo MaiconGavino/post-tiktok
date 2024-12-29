@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> QR Code Generator </title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+    <link rel="stylesheet" href="./static/styles.css">
+
+</head>
+
+<body>
+    <div id="app">
+        <h1>Gerador de QR CODE</h1>
+        <input v-model="text" placeholder="Entre com o texto..." />
+        <button @click="generateQRCode">Gerar</button>
+        <div v-if="qrCodeUrl">
+            <h3>Seu QR Code: </h3>
+            <img :src="qrCodeUrl" alt="QR Code" />
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+        createApp({
+            data() {
+                return {
+                    text: "",
+                    qrCodeUrl: ""
+                };
+            },
+            methods: {
+                async generateQRCode() {
+                    try {
+                        const response = await fetch('http://localhost:8080/generator', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ text: this.text })
+                        });
+                        if (!response.ok) throw new Error('Error ao gerar o QR Code');
+                        this.qrCodeUrl = URL.createObjectURL(await response.blob());
+                    } catch (error) {
+                        alert(error.message);
+                    }
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>
