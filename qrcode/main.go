@@ -16,7 +16,7 @@ func generateQRCode(w http.ResponseWriter, r *http.Request) {
 	var req QrRequest
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil || req.Text == "" {
-		http.Error(w, "Request Invalid", http.StatusBadRequest)
+		http.Error(w, "Request Invalido", http.StatusBadRequest)
 		return
 	}
 
@@ -34,6 +34,6 @@ func main() {
 	fileServer := http.FileServer(http.Dir("./template")) 
 	http.Handle("/", fileServer)
 	http.HandleFunc("/generator", generateQRCode)
-	fmt.Println("Starting server at port 8080")
+	fmt.Println("Iniciando o server na porta 8080")
 	http.ListenAndServe(":8080", nil)
 }
