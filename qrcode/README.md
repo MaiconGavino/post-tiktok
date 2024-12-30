@@ -1,6 +1,3 @@
-### **README.md**
-
-```markdown
 # QR Code Generator com Golang e Vue.js 🚀
 
 Este projeto é uma aplicação simples para gerar QR Codes a partir de links ou textos fornecidos pelo usuário. Utilizando **Golang** no backend e **Vue.js** no frontend, ele demonstra como integrar essas tecnologias de maneira eficiente e funcional.
