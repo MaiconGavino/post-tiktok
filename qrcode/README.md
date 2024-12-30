@@ -69,13 +69,14 @@ O objetivo do projeto é proporcionar uma solução prática para criar QR Codes
 
 ```plaintext
 qr-code-generator/
-├── backend/
-│   ├── main.go          # Código do servidor em Golang
-│   ├── go.mod           # Gerenciador de dependências do Go
-│   └── go.sum           # Checksum das dependências do Go
-├── frontend/
+
+├── main.go          # Código do servidor em Golang
+├── go.mod           # Gerenciador de dependências do Go
+└── go.sum           # Checksum das dependências do Go
+├── template/
 │   ├── index.html       # Interface do usuário
-│   ├── style.css        # Estilo da interface
+│   ├── static/
+│       ├── style.css    # Estilo da interface
 └── README.md            # Documentação do projeto
 ```
 
