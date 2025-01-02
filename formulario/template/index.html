@@ -60,6 +60,11 @@
                         });
                         if (!response.ok) {
                             throw new Error("Erro no envio dos dados");
+                        } else {
+                            this.nome = "";
+                            this.tel = "";
+                            this.email = "";
+                            this.password = "";
                         }
                         alert("Conta criada com sucesso!");
                     } catch (error) {
