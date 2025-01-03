@@ -8,7 +8,6 @@ Este projeto é uma aplicação simples formulário de cadastro de usuário. Uti
 
 ### **Backend**
 - **Linguagem:** Golang
-- **Biblioteca:** [`go-qrcode`](https://github.com/skip2/go-qrcode) para geração de QR Codes
 - **Servidor HTTP:** Embutido no Go
 
 ### **Frontend**
