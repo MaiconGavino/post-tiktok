@@ -1,12 +1,6 @@
 # QR Code Generator com Golang e Vue.js 🚀
 
-Este projeto é uma aplicação simples para gerar QR Codes a partir de links ou textos fornecidos pelo usuário. Utilizando **Golang** no backend e **Vue.js** no frontend, ele demonstra como integrar essas tecnologias de maneira eficiente e funcional.
-
----
-
-## 🎯 **Objetivo**
-
-O objetivo do projeto é proporcionar uma solução prática para criar QR Codes enquanto ensina conceitos importantes de integração entre backend e frontend. Este exemplo é ideal para quem está aprendendo ou deseja explorar as capacidades de **Golang** e **Vue.js**.
+Este projeto é uma aplicação simples formulário de cadastro de usuário. Utilizando **Golang** no backend e **Vue.js** no frontend, ele demonstra como integrar essas tecnologias de maneira eficiente e funcional.
 
 ---
 
@@ -23,15 +17,6 @@ O objetivo do projeto é proporcionar uma solução prática para criar QR Codes
 
 ---
 
-## 📌 **Como Funciona?**
-
-1. O usuário insere um texto ou link na interface web.
-2. O frontend envia o texto para o backend por meio de uma requisição HTTP POST.
-3. O backend utiliza a biblioteca `go-qrcode` para gerar o QR Code e retorna uma imagem PNG.
-4. O frontend exibe o QR Code gerado para o usuário.
-
----
-
 ## 🚀 **Como Rodar o Projeto**
 
 ### **Pré-requisitos**
@@ -42,11 +27,11 @@ O objetivo do projeto é proporcionar uma solução prática para criar QR Codes
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/MaiconGavino/post-tiktok/tree/main/qrcode
+   git clone https://github.com/MaiconGavino/post-tiktok/tree/main/formulario
    cd qrcode
    ```
 
-2. Instale as dependências do backend:
+2. Instale as dependências:
    ```bash
    go mod tidy
    ```
@@ -56,18 +41,12 @@ O objetivo do projeto é proporcionar uma solução prática para criar QR Codes
    go run main.go
    ```
 
-4. Abra o arquivo `index.html` no navegador:
-   ```bash
-   cd ../frontend
-   open index.html
-   ```
-
 ---
 
 ## 📂 **Estrutura do Projeto**
 
 ```plaintext
-qr-code-generator/
+formulario/
 
 ├── main.go          # Código do servidor em Golang
 ├── go.mod           # Gerenciador de dependências do Go
@@ -83,9 +62,8 @@ qr-code-generator/
 
 ## ✨ **Melhorias Futuras**
 
-- [ ] Adicionar funcionalidade para download do QR Code gerado.
-- [ ] Permitir personalização do QR Code (cores, tamanhos, etc.).
-- [ ] Implementar histórico de QR Codes gerados.
+- [ ] Adicionar a conexão com o banco de dados.
+- [ ] Criar a página de login.
 
 ---
 
