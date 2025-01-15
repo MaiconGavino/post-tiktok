@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"strings"
+	"unicode"
 )
 
 type TextRequest struct{
@@ -34,7 +35,7 @@ func processText(w http.ResponseWriter, r *http.Request){
 		Bold: ConvertBold(req.Text),
 		Italic: ConvertItalic(req.Text),
 		BoldItalic: ConvertBoldItalic(req.Text),
-		//Underline: ConvertUnderline(req.Text),
+		Underline: ConvertUnderline(req.Text),
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -60,6 +61,19 @@ func ConvertItalic(input string) string{
 func ConvertBoldItalic(input string) string{
 	return stringFormat(input, 0x1D468, 0x1D482)
 }
+
+func ConvertUnderline(input string) string{
+	var result strings.Builder
+	for _, r := range input{
+		if unicode.IsSpace(r) {
+			result.WriteRune(r)
+		}else{
+			result.WriteString(string(r)+ "\u0332") 
+		}
+	}
+	return result.String()
+}
+
 
 func stringFormat(input string, upperOffset, lowerOffset int) string{
 	var result strings.Builder
