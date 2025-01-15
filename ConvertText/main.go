@@ -3,23 +3,42 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
+	"strings"
 )
 
 type TextRequest struct{
 	Text string `json:"text"`
 }
 
+type TextResponse struct{
+	Bold string `json:"bold"`
+	Italic string `json:"italic"`
+	BoldItalic string `json:"boldItalic"`
+	Underline string `json:"underline"`
+}
+
 func processText(w http.ResponseWriter, r *http.Request){
-	defer r.Body.Close()
-	var text TextRequest
-	err:= json.NewDecoder(r.Body).Decode(&text)
-	if err != nil || text.Text == ""{
+	if r.Method != http.MethodPost{
+		http.Error(w, "Method not Allowed", http.StatusMethodNotAllowed)
+		return
+	}
+	var req TextRequest
+	err:= json.NewDecoder(r.Body).Decode(&req)
+	if err != nil || req.Text == ""{
 		http.Error(w, "Request Invalido", http.StatusBadRequest)
 		return
 	}
-	log.Println(text)
+	
+	textResp := TextResponse{
+		Bold: ConvertBold(req.Text),
+		Italic: ConvertItalic(req.Text),
+		BoldItalic: ConvertBoldItalic(req.Text),
+		//Underline: ConvertUnderline(req.Text),
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(textResp)
 }
 
 func main(){
@@ -28,4 +47,31 @@ func main(){
 	http.HandleFunc("/convert", processText)
 	fmt.Println("Iniciando o servido na porta 8080")
 	http.ListenAndServe(":8080", nil)
+}
+
+func ConvertBold(input string) string{
+	return stringFormat(input, 0x1D400, 0x1D41A)
+}
+
+func ConvertItalic(input string) string{
+	return stringFormat(input, 0x1D434, 0x1D44E)
+}
+
+func ConvertBoldItalic(input string) string{
+	return stringFormat(input, 0x1D468, 0x1D482)
+}
+
+func stringFormat(input string, upperOffset, lowerOffset int) string{
+	var result strings.Builder
+	for _, r := range input{
+		if r >= 'A' && r <= 'Z'{
+			result.WriteRune(rune(int(r) - 'A' + upperOffset))
+		} else if r >= 'a' && r <= 'z'{
+			result.WriteRune(rune(int(r) - 'a' + lowerOffset))
+		} else {
+			result.WriteRune(r)
+		}
+		
+	}
+	return result.String()
 }
